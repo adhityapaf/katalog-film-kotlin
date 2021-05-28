@@ -4,9 +4,9 @@ data class FilmEntity(
     var filmId: String,
     var title: String,
     var overview: String,
-    var release_date: String,
+    var releaseDate: String,
     var genre: String,
-    var poster: Int,
+    var poster: String,
     var duration: String,
     var link: String
 )

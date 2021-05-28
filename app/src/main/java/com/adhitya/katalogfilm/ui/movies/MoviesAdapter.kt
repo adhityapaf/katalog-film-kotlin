@@ -14,7 +14,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.FilmViewHolder>() {
 
     private var listFilms = ArrayList<FilmEntity>()
 
-    fun setFilms(films: ArrayList<FilmEntity>?) {
+    fun setFilms(films: List<FilmEntity>?) {
         if (films == null) return
         this.listFilms.clear()
         this.listFilms.addAll(films)

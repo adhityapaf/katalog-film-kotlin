@@ -3,6 +3,7 @@ package com.adhitya.katalogfilm.ui.tv_shows
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.adhitya.katalogfilm.data.FilmEntity
 import com.adhitya.katalogfilm.databinding.ItemsTvShowsBinding
@@ -13,7 +14,7 @@ class TVShowsAdapter : RecyclerView.Adapter<TVShowsAdapter.TVShowsViewHolder>() 
 
     private var listTVShows = ArrayList<FilmEntity>()
 
-    fun setTvShows(tv_shows: ArrayList<FilmEntity>?) {
+    fun setTvShows(tv_shows: List<FilmEntity>) {
         if (tv_shows == null) return
         this.listTVShows.clear()
         this.listTVShows.addAll(tv_shows)

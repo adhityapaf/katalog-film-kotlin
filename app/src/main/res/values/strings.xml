@@ -12,4 +12,5 @@
     <string name="bullet">•</string>
     <string name="share_film_information">Bagikan Informasi Film</string>
     <string name="see_film_details">Lihat Detail Film</string>
+    <string name="no_contents">"Konten Tidak Ada</string>
 </resources>

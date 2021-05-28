@@ -3,6 +3,7 @@ package com.adhitya.katalogfilm.ui.details
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -15,6 +16,7 @@ import com.adhitya.katalogfilm.databinding.ActivityDetailFilmBinding
 import com.adhitya.katalogfilm.databinding.ContentDetailFilmBinding
 import com.adhitya.katalogfilm.ui.movies.MoviesViewModel
 import com.adhitya.katalogfilm.ui.tv_shows.TVShowsViewModel
+import com.adhitya.katalogfilm.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 
 class DetailFilmActivity : AppCompatActivity() {
@@ -35,13 +37,14 @@ class DetailFilmActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val factory = ViewModelFactory.getInstance(this)
         val moviesViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[MoviesViewModel::class.java]
         val tvShowsViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[TVShowsViewModel::class.java]
 
         val extras = intent.extras
@@ -49,16 +52,26 @@ class DetailFilmActivity : AppCompatActivity() {
             val filmId = extras.getString(FILM_EXTRA)
             val filmType = extras.getString(FILM_TYPE)
             if (filmId != null) {
+                activityDetailFilmBinding.progressBar.visibility = View.VISIBLE
+                activityDetailFilmBinding.content.visibility = View.INVISIBLE
                 when (filmType) {
                     "movies" -> {
                         moviesViewModel.setSelectedMovies(filmId)
-                        populateContent(moviesViewModel.getDetailMovies())
+                        moviesViewModel.getDetailMovies().observe(this, { movies ->
+                            activityDetailFilmBinding.progressBar.visibility = View.GONE
+                            activityDetailFilmBinding.content.visibility = View.VISIBLE
+                            populateContent(movies)
+                        })
                     }
                     "tv_shows" -> {
                         tvShowsViewModel.setSelectedTVShows(filmId)
-                        populateContent(tvShowsViewModel.getDetailTVShows())
+                        tvShowsViewModel.getDetailTvShows().observe(this, {tvShows ->
+                            activityDetailFilmBinding.progressBar.visibility = View.GONE
+                            activityDetailFilmBinding.content.visibility = View.VISIBLE
+                            populateContent(tvShows)
+                        })
                     }
-                    else -> Toast.makeText(this, "Konten Tidak Ada", Toast.LENGTH_SHORT).show()
+                    else -> Toast.makeText(this, R.string.no_contents, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -68,7 +81,7 @@ class DetailFilmActivity : AppCompatActivity() {
     private fun populateContent(filmEntity: FilmEntity) {
         with(detailFilmBinding) {
             textTitle.text = filmEntity.title
-            textReleaseDate.text = filmEntity.release_date
+            textReleaseDate.text = filmEntity.releaseDate
             textGenre.text = filmEntity.genre
             textDuration.text = filmEntity.duration
             textOverview.text = filmEntity.overview
@@ -79,7 +92,7 @@ class DetailFilmActivity : AppCompatActivity() {
                     .from(this@DetailFilmActivity)
                     .setType(mimeType)
                     .setChooserTitle("Bagikan informasi film ini ke :")
-                    .setText("Film ${filmEntity.title} (${filmEntity.release_date}) sepertinya bagus, yuk cek detailnya di ${filmEntity.link}")
+                    .setText("Film ${filmEntity.title} (${filmEntity.releaseDate}) sepertinya bagus, yuk cek detailnya di ${filmEntity.link}")
                     .startChooser()
             }
             buttonDetail.setOnClickListener {

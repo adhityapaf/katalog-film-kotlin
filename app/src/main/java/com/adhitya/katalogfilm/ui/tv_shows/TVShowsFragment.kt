@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adhitya.katalogfilm.databinding.FragmentTVShowsBinding
+import com.adhitya.katalogfilm.viewmodel.ViewModelFactory
 
 class TVShowsFragment : Fragment() {
     lateinit var fragmentTVShowsBinding: FragmentTVShowsBinding
@@ -17,7 +18,7 @@ class TVShowsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fragmentTVShowsBinding = FragmentTVShowsBinding.inflate(inflater, container, false)
+        fragmentTVShowsBinding = FragmentTVShowsBinding.inflate(layoutInflater, container, false)
         return fragmentTVShowsBinding.root
     }
 
@@ -25,14 +26,19 @@ class TVShowsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
+            val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.NewInstanceFactory()
+                factory
             )[TVShowsViewModel::class.java]
-            val tv_shows = viewModel.getTVShows()
+            val tvShows = viewModel.getTVShows()
 
             val tvShowsAdapter = TVShowsAdapter()
-            tvShowsAdapter.setTvShows(tv_shows)
+            fragmentTVShowsBinding.progressBar.visibility = View.VISIBLE
+            viewModel.getTVShows().observe(viewLifecycleOwner, {tvShow ->
+                fragmentTVShowsBinding.progressBar.visibility = View.GONE
+                tvShowsAdapter.setTvShows(tvShow)
+            })
 
             with(fragmentTVShowsBinding.rvTvShows) {
                 layoutManager = LinearLayoutManager(context)
