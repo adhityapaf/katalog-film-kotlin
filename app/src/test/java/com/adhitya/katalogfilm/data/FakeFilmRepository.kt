@@ -1,35 +1,29 @@
-package com.adhitya.katalogfilm.data.source
+package com.adhitya.katalogfilm.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.adhitya.katalogfilm.data.FilmEntity
+import com.adhitya.katalogfilm.data.source.FilmDataSource
 import com.adhitya.katalogfilm.data.source.remote.RemoteDataSource
-import com.adhitya.katalogfilm.data.source.remote.response.*
+import com.adhitya.katalogfilm.data.source.remote.response.MoviesDetailsResponse
+import com.adhitya.katalogfilm.data.source.remote.response.MoviesResultsItem
+import com.adhitya.katalogfilm.data.source.remote.response.ResultsItem
+import com.adhitya.katalogfilm.data.source.remote.response.TVShowsDetailsResponse
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FilmRepository private constructor(private val remoteDataSource: RemoteDataSource) :
-    FilmDataSource {
+class FakeFilmRepository (private val remoteDataSource: RemoteDataSource) : FilmDataSource{
 
     companion object {
         private const val POSTER_PREFIX_URL = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2"
         private const val MOVIE_LINK_PREFIX_URL = "https://www.themoviedb.org/movie/"
         private const val TV_SHOWS_LINK_PREFIX_URL = "https://www.themoviedb.org/tv/"
-
-        @Volatile
-        private var instance: FilmRepository? = null
-
-        fun getInstance(remoteDataSource: RemoteDataSource): FilmRepository =
-            instance ?: synchronized(this) {
-                instance ?: FilmRepository(remoteDataSource).apply { instance = this }
-            }
     }
 
     override fun getMovies(): LiveData<List<FilmEntity>> {
 
         val moviesResults = MutableLiveData<List<FilmEntity>>()
-        CoroutineScope(IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             remoteDataSource.getMoviesList(object : RemoteDataSource.LoadMoviesListCallback {
                 override fun onMoviesListReceived(moviesResultsItem: List<MoviesResultsItem>) {
                     val moviesList = ArrayList<FilmEntity>()
@@ -55,7 +49,7 @@ class FilmRepository private constructor(private val remoteDataSource: RemoteDat
 
     override fun getDetailsMovies(filmId: String): LiveData<FilmEntity> {
         val moviesDetailsResult = MutableLiveData<FilmEntity>()
-        CoroutineScope(IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             remoteDataSource.getMoviesDetails(
                 filmId.toInt(),
                 object : RemoteDataSource.LoadMoviesDetailsCallback {
@@ -79,7 +73,7 @@ class FilmRepository private constructor(private val remoteDataSource: RemoteDat
 
     override fun getTvShows(): LiveData<List<FilmEntity>> {
         val tvShowsResult = MutableLiveData<List<FilmEntity>>()
-        CoroutineScope(IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             remoteDataSource.getTvShowsList(object : RemoteDataSource.LoadTvShowsListCallback {
                 override fun onTvShowsListReceived(tvShowsResponse: List<ResultsItem>) {
                     val tvShowsList = ArrayList<FilmEntity>()
@@ -105,7 +99,7 @@ class FilmRepository private constructor(private val remoteDataSource: RemoteDat
 
     override fun getDetailsTvShows(filmId: String): LiveData<FilmEntity> {
         val tvShowsDetailsResult = MutableLiveData<FilmEntity>()
-        CoroutineScope(IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             remoteDataSource.getTvShowsDetails(
                 filmId.toInt(),
                 object : RemoteDataSource.LoadTvShowsDetailsCallback {
@@ -127,5 +121,4 @@ class FilmRepository private constructor(private val remoteDataSource: RemoteDat
 
         return tvShowsDetailsResult
     }
-
 }

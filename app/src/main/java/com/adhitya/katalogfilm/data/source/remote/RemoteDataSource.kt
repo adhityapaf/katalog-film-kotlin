@@ -1,51 +1,57 @@
 package com.adhitya.katalogfilm.data.source.remote
 
-import android.os.Handler
-import android.os.Looper
 import com.adhitya.katalogfilm.data.source.remote.response.MoviesDetailsResponse
 import com.adhitya.katalogfilm.data.source.remote.response.MoviesResultsItem
 import com.adhitya.katalogfilm.data.source.remote.response.ResultsItem
 import com.adhitya.katalogfilm.data.source.remote.response.TVShowsDetailsResponse
-import com.adhitya.katalogfilm.utils.ApiHelper
 import com.adhitya.katalogfilm.utils.EspressoIdlingResource
+import retrofit2.await
 
 
-class RemoteDataSource private constructor(private val apiHelper: ApiHelper) {
-    private val handler = Handler(Looper.getMainLooper())
+class RemoteDataSource {
     companion object {
-        private const val SERVICE_LATENCY_IN_MILLS : Long = 500
+
+        const val API_KEY = "95a852f12ee3b7fced1a6343e4f2c221"
 
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance(helper: ApiHelper) : RemoteDataSource =
+        fun getInstance() : RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(helper).apply { instance = this }
+                instance ?: RemoteDataSource().apply { instance = this }
             }
     }
 
-    fun getMoviesList(callback: LoadMoviesListCallback) {
+    suspend fun getMoviesList(callback: LoadMoviesListCallback) {
         EspressoIdlingResource.increment()
-        handler.postDelayed({callback.onMoviesListReceived(apiHelper.loadMoviesList())
-        EspressoIdlingResource.decrement()}, SERVICE_LATENCY_IN_MILLS)
+        ApiConfig.instance.getListMovies(API_KEY).await().results.let { movieList ->
+            callback.onMoviesListReceived(movieList)
+            EspressoIdlingResource.decrement()
+        }
     }
 
-    fun getMoviesDetails(movieId: Int, callback: LoadMoviesDetailsCallback){
+    suspend fun getMoviesDetails(movieId: Int, callback: LoadMoviesDetailsCallback){
         EspressoIdlingResource.increment()
-        handler.postDelayed({callback.onMoviesDetailsReceived(apiHelper.loadMovieDetails(movieId))
-        EspressoIdlingResource.decrement()}, SERVICE_LATENCY_IN_MILLS)
+        ApiConfig.instance.getDetailsMovies(movieId, API_KEY).await().let { movieDetails ->
+            callback.onMoviesDetailsReceived(movieDetails)
+            EspressoIdlingResource.decrement()
+        }
     }
 
-    fun getTvShowsList(callback: LoadTvShowsListCallback) {
+    suspend fun getTvShowsList(callback: LoadTvShowsListCallback) {
         EspressoIdlingResource.increment()
-        handler.postDelayed({callback.onTvShowsListReceived(apiHelper.loadTvShowsList())
-        EspressoIdlingResource.decrement()}, SERVICE_LATENCY_IN_MILLS)
+        ApiConfig.instance.getListTvShows(API_KEY).await().results.let { tvShowsList ->
+            callback.onTvShowsListReceived(tvShowsList)
+            EspressoIdlingResource.decrement()
+        }
     }
 
-    fun getTvShowsDetails(tv_id: Int, callback: LoadTvShowsDetailsCallback) {
+    suspend fun getTvShowsDetails(tv_id: Int, callback: LoadTvShowsDetailsCallback) {
         EspressoIdlingResource.increment()
-        handler.postDelayed({callback.onTvShowsDetailsReceived(apiHelper.loadTvShowsDetails(tv_id))
-        EspressoIdlingResource.decrement()}, SERVICE_LATENCY_IN_MILLS)
+        ApiConfig.instance.getDetailsTvShows(tv_id, API_KEY).await().let { tvShowsDetails ->
+            callback.onTvShowsDetailsReceived(tvShowsDetails)
+            EspressoIdlingResource.decrement()
+        }
     }
 
     interface LoadMoviesListCallback {

@@ -19,20 +19,26 @@ data class TVShowsResponse(
 
 data class ResultsItem(
 
-	@field:SerializedName("first_air_date")
-	val firstAirDate: String,
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("name")
+	val name: String,
 
 	@field:SerializedName("overview")
 	val overview: String,
 
-	@field:SerializedName("original_language")
-	val originalLanguage: String,
+	@field:SerializedName("first_air_date")
+	val firstAirDate: String,
 
 	@field:SerializedName("genre_ids")
 	val genreIds: List<Int>,
 
 	@field:SerializedName("poster_path")
 	val posterPath: String,
+
+	@field:SerializedName("original_language")
+	val originalLanguage: String,
 
 	@field:SerializedName("origin_country")
 	val originCountry: List<String>,
@@ -48,12 +54,6 @@ data class ResultsItem(
 
 	@field:SerializedName("vote_average")
 	val voteAverage: Double,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
 
 	@field:SerializedName("vote_count")
 	val voteCount: Int

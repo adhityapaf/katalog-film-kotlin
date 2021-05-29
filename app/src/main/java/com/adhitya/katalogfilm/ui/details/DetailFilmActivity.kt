@@ -5,8 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
@@ -85,7 +83,9 @@ class DetailFilmActivity : AppCompatActivity() {
             textGenre.text = filmEntity.genre
             textDuration.text = filmEntity.duration
             textOverview.text = filmEntity.overview
-            imagePoster.setImageResource(filmEntity.poster.toInt())
+            Glide.with(this@DetailFilmActivity)
+                .load(filmEntity.poster)
+                .into(imagePoster)
             buttonShare.setOnClickListener {
                 val mimeType = "text/plain"
                 ShareCompat.IntentBuilder
@@ -96,9 +96,7 @@ class DetailFilmActivity : AppCompatActivity() {
                     .startChooser()
             }
             buttonDetail.setOnClickListener {
-                val intent: Intent = Uri.parse(filmEntity.link).let { webpage ->
-                    Intent(Intent.ACTION_VIEW, webpage)
-                }
+                val intent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse(filmEntity.link))
                 buttonDetail.context.startActivity(intent)
             }
         }

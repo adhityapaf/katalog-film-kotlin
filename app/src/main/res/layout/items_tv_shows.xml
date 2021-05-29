@@ -45,14 +45,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_item_genre"
+            android:id="@+id/tv_item_overview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:gravity="start"
-            android:maxLines="2"
-            android:text="@string/genre"
+            android:maxLines="6"
+            android:text="@string/overview"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

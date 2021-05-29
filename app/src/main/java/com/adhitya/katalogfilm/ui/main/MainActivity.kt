@@ -1,8 +1,7 @@
 package com.adhitya.katalogfilm.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.adhitya.katalogfilm.R
+import androidx.appcompat.app.AppCompatActivity
 import com.adhitya.katalogfilm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

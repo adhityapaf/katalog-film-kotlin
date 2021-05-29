@@ -8,7 +8,6 @@ import com.adhitya.katalogfilm.data.FilmEntity
 import com.adhitya.katalogfilm.databinding.ItemsMoviesBinding
 import com.adhitya.katalogfilm.ui.details.DetailFilmActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.FilmViewHolder>() {
 
@@ -23,7 +22,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.FilmViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoviesAdapter.FilmViewHolder {
+    ): FilmViewHolder {
         val itemsMoviesBinding =
             ItemsMoviesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FilmViewHolder(itemsMoviesBinding)
@@ -31,7 +30,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.FilmViewHolder>() {
 
     override fun getItemCount(): Int = listFilms.size
 
-    override fun onBindViewHolder(holder: MoviesAdapter.FilmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
         val film = listFilms[position]
         holder.bind(film)
     }
@@ -41,7 +40,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.FilmViewHolder>() {
         fun bind(film: FilmEntity) {
             with(binding) {
                 tvItemTitle.text = film.title
-                tvItemGenre.text = film.genre
+                tvItemOverview.text = film.overview
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailFilmActivity::class.java)
                     intent.putExtra(DetailFilmActivity.FILM_TYPE, "movies")

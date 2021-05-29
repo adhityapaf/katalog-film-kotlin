@@ -3,7 +3,6 @@ package com.adhitya.katalogfilm.ui.tv_shows
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.adhitya.katalogfilm.data.FilmEntity
 import com.adhitya.katalogfilm.databinding.ItemsTvShowsBinding
@@ -23,7 +22,7 @@ class TVShowsAdapter : RecyclerView.Adapter<TVShowsAdapter.TVShowsViewHolder>() 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): TVShowsAdapter.TVShowsViewHolder {
+    ): TVShowsViewHolder {
         val itemsTVShowsBinding =
             ItemsTvShowsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TVShowsViewHolder(itemsTVShowsBinding)
@@ -31,7 +30,7 @@ class TVShowsAdapter : RecyclerView.Adapter<TVShowsAdapter.TVShowsViewHolder>() 
 
     override fun getItemCount(): Int = listTVShows.size
 
-    override fun onBindViewHolder(holder: TVShowsAdapter.TVShowsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TVShowsViewHolder, position: Int) {
         val tv_shows = listTVShows[position]
         holder.bind(tv_shows)
     }
@@ -41,7 +40,7 @@ class TVShowsAdapter : RecyclerView.Adapter<TVShowsAdapter.TVShowsViewHolder>() 
         fun bind(tv_shows: FilmEntity) {
             with(binding) {
                 tvItemTitle.text = tv_shows.title
-                tvItemGenre.text = tv_shows.genre
+                tvItemOverview.text = tv_shows.overview
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailFilmActivity::class.java)
                     intent.putExtra(DetailFilmActivity.FILM_TYPE, "tv_shows")

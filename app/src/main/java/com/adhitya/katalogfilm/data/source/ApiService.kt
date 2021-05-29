@@ -9,10 +9,10 @@ interface ApiService {
     @GET("movie/popular")
     fun getListMovies(@Query("api_key") api_key: String) : Call<MoviesResponse>
 
-    @GET("movie/{id}")
+    @GET("movie/{movie_id}")
     fun getDetailsMovies(
-        @Query("api_key") api_key: String,
-        @Path("movie_id") movie_id: Int
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
     ) : Call<MoviesDetailsResponse>
 
     @GET("tv/popular")
@@ -20,9 +20,9 @@ interface ApiService {
         @Query("api_key") api_key: String
     ) : Call<TVShowsResponse>
 
-    @GET("tv/{id}")
+    @GET("tv/{tv_id}")
     fun getDetailsTvShows(
-        @Query("api_key") api_key: String,
-        @Path("tv_id") tv_id: Int
+        @Path("tv_id") tv_id: Int,
+        @Query("api_key") api_key: String
     ) : Call<TVShowsDetailsResponse>
 }
