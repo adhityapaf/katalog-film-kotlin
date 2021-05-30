@@ -12,9 +12,12 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class TVShowsViewModelTest {
     private lateinit var viewModel: TVShowsViewModel
     private val tvShowsData = FilmsData.generateTVShowsData()[0]
@@ -29,6 +32,9 @@ class TVShowsViewModelTest {
     @Mock
     private lateinit var detailObserver: Observer<FilmEntity>
 
+    @Mock
+    private lateinit var observer: Observer<List<FilmEntity>>
+
     @Before
     fun setUp() {
         viewModel = TVShowsViewModel(filmRepository)
@@ -42,9 +48,12 @@ class TVShowsViewModelTest {
         tvShows.value = tvShowsListDummy
         Mockito.`when`(filmRepository.getTvShows()).thenReturn(tvShows)
         val tvShowsEntity = viewModel.getTVShows().value
-        verify(filmRepository).getMovies()
+        verify(filmRepository).getTvShows()
         assertNotNull(tvShowsEntity)
         assertEquals(20, tvShowsEntity?.size)
+
+        viewModel.getTVShows().observeForever(observer)
+        verify(observer).onChanged(tvShowsListDummy)
     }
 
     @Test
