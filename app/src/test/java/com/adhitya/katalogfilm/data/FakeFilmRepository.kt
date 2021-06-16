@@ -3,6 +3,7 @@ package com.adhitya.katalogfilm.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.adhitya.katalogfilm.data.source.FilmDataSource
+import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
 import com.adhitya.katalogfilm.data.source.remote.RemoteDataSource
 import com.adhitya.katalogfilm.data.source.remote.response.MoviesDetailsResponse
 import com.adhitya.katalogfilm.data.source.remote.response.MoviesResultsItem

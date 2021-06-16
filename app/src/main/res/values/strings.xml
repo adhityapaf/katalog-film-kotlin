@@ -13,4 +13,6 @@
     <string name="share_film_information">Bagikan Informasi Film</string>
     <string name="see_film_details">Lihat Detail Film</string>
     <string name="no_contents">"Konten Tidak Ada</string>
+    <string name="favorite">Favorit</string>
+    <string name="favorite_activity_title">Favorit Katalog Film</string>
 </resources>

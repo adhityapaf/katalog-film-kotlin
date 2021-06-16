@@ -11,7 +11,7 @@ data class TVShowsResponse(
 	val totalPages: Int,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItem>,
+	val results: MutableList<ResultsItem>,
 
 	@field:SerializedName("total_results")
 	val totalResults: Int

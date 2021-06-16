@@ -1,6 +1,6 @@
 package com.adhitya.katalogfilm.utils
 
-import com.adhitya.katalogfilm.data.FilmEntity
+import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
 import com.adhitya.katalogfilm.data.source.remote.response.*
 
 object FilmsData {
@@ -16,7 +16,9 @@ object FilmsData {
                 "Drama, Romance, Music",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
                 "2h 16m",
-                "https://www.themoviedb.org/movie/332562-a-star-is-born"
+                "https://www.themoviedb.org/movie/332562-a-star-is-born",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -28,7 +30,9 @@ object FilmsData {
                 "Action, Science Fiction, Adventure",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xRWht48C2V8XNfzvPehyClOvDni.jpg",
                 "2h 2m",
-                "https://www.themoviedb.org/movie/399579-alita-battle-angel"
+                "https://www.themoviedb.org/movie/399579-alita-battle-angel",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -40,7 +44,9 @@ object FilmsData {
                 "Action, Adventure, Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xLPffWMhMj1l50ND3KchMjYoKmE.jpg",
                 "2h 23m",
-                "https://www.themoviedb.org/movie/297802-aquaman"
+                "https://www.themoviedb.org/movie/297802-aquaman",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -52,7 +58,9 @@ object FilmsData {
                 "Music, Drama, History",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
                 "2h 15m",
-                "https://www.themoviedb.org/movie/424694-bohemian-rhapsody"
+                "https://www.themoviedb.org/movie/424694-bohemian-rhapsody",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -64,7 +72,9 @@ object FilmsData {
                 "Action, Crime, Thriller",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg",
                 "1h 59m",
-                "https://www.themoviedb.org/movie/438650-cold-pursuit"
+                "https://www.themoviedb.org/movie/438650-cold-pursuit",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -76,7 +86,9 @@ object FilmsData {
                 "Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
                 "2h 10m",
-                "https://www.themoviedb.org/movie/480530-creed-ii"
+                "https://www.themoviedb.org/movie/480530-creed-ii",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -88,7 +100,9 @@ object FilmsData {
                 "Adventure, Fantasy, Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fMMrl8fD9gRCFJvsx0SuFwkEOop.jpg",
                 "2h 14m",
-                "https://www.themoviedb.org/movie/338952-fantastic-beasts-the-crimes-of-grindelwald"
+                "https://www.themoviedb.org/movie/338952-fantastic-beasts-the-crimes-of-grindelwald",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -100,7 +114,9 @@ object FilmsData {
                 "Adventure, Fantasy, Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
                 "2h 14m",
-                "https://www.themoviedb.org/movie/450465-glass"
+                "https://www.themoviedb.org/movie/450465-glass",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -112,7 +128,9 @@ object FilmsData {
                 "Animation, Family, Adventure",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg",
                 "1h 44m",
-                "https://www.themoviedb.org/movie/166428-how-to-train-your-dragon-3"
+                "https://www.themoviedb.org/movie/166428-how-to-train-your-dragon-3",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -124,7 +142,9 @@ object FilmsData {
                 "Adventure, Action, Science Fiction",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
                 "2h 29m",
-                "https://www.themoviedb.org/movie/299536-avengers-infinity-war"
+                "https://www.themoviedb.org/movie/299536-avengers-infinity-war",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -136,7 +156,9 @@ object FilmsData {
                 "Drama, History",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/b5RMzLAyq5QW6GtN9sIeAEMLlBI.jpg",
                 "2h 4m",
-                "https://www.themoviedb.org/movie/457136-mary-queen-of-scots"
+                "https://www.themoviedb.org/movie/457136-mary-queen-of-scots",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -148,7 +170,9 @@ object FilmsData {
                 "Action",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6VxEvOF7QDovsG6ro9OVyjH07LF.jpg",
                 "1h 47m",
-                "https://www.themoviedb.org/movie/450001-cheung-tin-chi"
+                "https://www.themoviedb.org/movie/450001-cheung-tin-chi",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -160,7 +184,9 @@ object FilmsData {
                 "Adventure, Science Fiction",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gLhYg9NIvIPKVRTtvzCWnp1qJWG.jpg",
                 "2h 9m",
-                "https://www.themoviedb.org/movie/428078-mortal-engines"
+                "https://www.themoviedb.org/movie/428078-mortal-engines",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -172,7 +198,9 @@ object FilmsData {
                 "Horror, War, Science Fiction",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/l76Rgp32z2UxjULApxGXAPpYdAP.jpg",
                 "1h 50m",
-                "https://www.themoviedb.org/movie/438799-overlord"
+                "https://www.themoviedb.org/movie/438799-overlord",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -184,7 +212,9 @@ object FilmsData {
                 "Family, Animation, Comedy, Adventure",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qEnH5meR381iMpmCumAIMswcQw2.jpg",
                 "1h 52m",
-                "https://www.themoviedb.org/movie/404368-ralph-breaks-the-internet"
+                "https://www.themoviedb.org/movie/404368-ralph-breaks-the-internet",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -196,7 +226,9 @@ object FilmsData {
                 "Adventure, Action, Thriller",
                 "https://www.themoviedb.org/movie/375588-robin-hood-origins",
                 "1h 56m",
-                "https://www.themoviedb.org/movie/375588-robin-hood-origins"
+                "https://www.themoviedb.org/movie/375588-robin-hood-origins",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -208,7 +240,9 @@ object FilmsData {
                 "Thriller, Mystery, Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hgWAcic93phg4DOuQ8NrsgQWiqu.jpg",
                 "1h 42m",
-                "https://www.themoviedb.org/movie/452832-serenity"
+                "https://www.themoviedb.org/movie/452832-serenity",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -220,7 +254,9 @@ object FilmsData {
                 "Action, Adventure, Animation, Science Fiction, Comedy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg",
                 "1h 57m",
-                "https://www.themoviedb.org/movie/324857-spider-man-into-the-spider-verse"
+                "https://www.themoviedb.org/movie/324857-spider-man-into-the-spider-verse",
+                "movies",
+                false
             )
         )
         movies.add(
@@ -232,7 +268,9 @@ object FilmsData {
                 "War, Action, Drama, History",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/jqBIHiSglRfNxjh1zodHLa9E7zW.jpg",
                 "2h 19m",
-                "https://www.themoviedb.org/movie/505954-34"
+                "https://www.themoviedb.org/movie/505954-34",
+                "movies",
+                false
             )
         )
 
@@ -251,7 +289,9 @@ object FilmsData {
                 "Crime, Drama, Mystery, Action & Adventure",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg",
                 "42 menit",
-                "https://www.themoviedb.org/tv/1412-arrow"
+                "https://www.themoviedb.org/tv/1412-arrow",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -263,7 +303,9 @@ object FilmsData {
                 "Sci-Fi & Fantasy, Comedy, Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/drlfSCIlMKrEeMPhi8pqY4xGxj.jpg",
                 "49 menit",
-                "https://www.themoviedb.org/tv/79501-doom-patrol"
+                "https://www.themoviedb.org/tv/79501-doom-patrol",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -275,7 +317,9 @@ object FilmsData {
                 "Animation, Action & Adventure, Sci-Fi & Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tZ0jXOeYBWPZ0OWzUhTlYvMF7YR.jpg",
                 "25 menit",
-                "https://www.themoviedb.org/tv/12609-dragon-ball"
+                "https://www.themoviedb.org/tv/12609-dragon-ball",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -287,7 +331,9 @@ object FilmsData {
                 "Action & Adventure, Animation, Comedy, Sci-Fi & Fantasy, Mystery",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/jsYTctFnK8ewomnUgcwhmsTkOum.jpg",
                 "25 menit",
-                "https://www.themoviedb.org/tv/46261-fairy-tail"
+                "https://www.themoviedb.org/tv/46261-fairy-tail",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -299,7 +345,9 @@ object FilmsData {
                 "Animation, Comedy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/eWWCRjBfLyePh2tfZdvNcIvKSJe.jpg",
                 "22 menit",
-                "https://www.themoviedb.org/tv/1434-family-guy"
+                "https://www.themoviedb.org/tv/1434-family-guy",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -311,7 +359,9 @@ object FilmsData {
                 "Drama, Sci-Fi & Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lJA2RCMfsWoskqlQhXPSLFQGXEJ.jpg",
                 "44 menit",
-                "https://www.themoviedb.org/tv/60735-the-flash"
+                "https://www.themoviedb.org/tv/60735-the-flash",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -323,7 +373,9 @@ object FilmsData {
                 "Sci-Fi & Fantasy, Drama, Action & Adventure",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
                 "1 jam",
-                "https://www.themoviedb.org/tv/1399-game-of-thrones"
+                "https://www.themoviedb.org/tv/1399-game-of-thrones",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -335,7 +387,9 @@ object FilmsData {
                 "Drama, Crime, Sci-Fi & Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg",
                 "43 menit",
-                "https://www.themoviedb.org/tv/60708-gotham"
+                "https://www.themoviedb.org/tv/60708-gotham",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -347,7 +401,9 @@ object FilmsData {
                 "Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
                 "43 menit",
-                "https://www.themoviedb.org/tv/1416-grey-s-anatomy"
+                "https://www.themoviedb.org/tv/1416-grey-s-anatomy",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -359,7 +415,9 @@ object FilmsData {
                 "Action & Adventure, Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/iYUtjx1EN4SVTgxd2TB4cZTGSQb.jpg",
                 "50 menit",
-                "https://www.themoviedb.org/tv/54155-hanna"
+                "https://www.themoviedb.org/tv/54155-hanna",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -371,7 +429,9 @@ object FilmsData {
                 "Action & Adventure, Drama, Sci-Fi & Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg",
                 "55 menit",
-                "https://www.themoviedb.org/tv/62127-marvel-s-iron-fist"
+                "https://www.themoviedb.org/tv/62127-marvel-s-iron-fist",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -383,7 +443,9 @@ object FilmsData {
                 "Animation, Action & Adventure, Sci-Fi & Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/zAYRe2bJxpWTVrwwmBc00VFkAf4.jpg",
                 "25 menit",
-                "https://www.themoviedb.org/tv/31910-naruto-shipp-den"
+                "https://www.themoviedb.org/tv/31910-naruto-shipp-den",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -395,7 +457,9 @@ object FilmsData {
                 "Crime, Action & Adventure, Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fi8EvaWtL5CvoielOjjVvTr7ux3.jpg",
                 "45 menit",
-                "https://www.themoviedb.org/tv/4614-ncis"
+                "https://www.themoviedb.org/tv/4614-ncis",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -407,7 +471,9 @@ object FilmsData {
                 "Mystery, Drama, Crime",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wRbjVBdDo5qHAEOVYoMWpM58FSA.jpg",
                 "45 menit",
-                "https://www.themoviedb.org/tv/69050-riverdale"
+                "https://www.themoviedb.org/tv/69050-riverdale",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -419,7 +485,9 @@ object FilmsData {
                 "Drama, Comedy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg",
                 "57 menit",
-                "https://www.themoviedb.org/tv/34307-shameless"
+                "https://www.themoviedb.org/tv/34307-shameless",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -431,7 +499,9 @@ object FilmsData {
                 "Drama, Sci-Fi & Fantasy, Action & Adventure",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/zsaiq8ZclPuneuN7loLEbsh1ANJ.jpg",
                 "42 menit",
-                "https://www.themoviedb.org/tv/62688-supergirl"
+                "https://www.themoviedb.org/tv/62688-supergirl",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -443,7 +513,9 @@ object FilmsData {
                 "Drama, Mystery, Sci-Fi & Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/KoYWXbnYuS3b0GyQPkbuexlVK9.jpg",
                 "45 menit",
-                "https://www.themoviedb.org/tv/1622-supernatural"
+                "https://www.themoviedb.org/tv/1622-supernatural",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -455,7 +527,9 @@ object FilmsData {
                 "Family, Animation, Comedy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/zLudbPueg8CxGhMS2tyDh3p0TdK.jpg",
                 "22 menit",
-                "https://www.themoviedb.org/tv/456-the-simpsons"
+                "https://www.themoviedb.org/tv/456-the-simpsons",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -467,7 +541,9 @@ object FilmsData {
                 "Action & Adventure, Sci-Fi & Fantasy, Drama",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/scZlQQYnDVlnpxFTxaIv2g0BWnL.jpg",
                 "55 menit",
-                "https://www.themoviedb.org/tv/75006-umbrella-academy"
+                "https://www.themoviedb.org/tv/75006-umbrella-academy",
+                "tv_shows",
+                false
             )
         )
         tv_shows.add(
@@ -479,7 +555,9 @@ object FilmsData {
                 "Action & Adventure, Drama, Sci-Fi & Fantasy",
                 "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/rqeYMLryjcawh2JeRpCVUDXYM5b.jpg",
                 "42 menit",
-                "https://www.themoviedb.org/tv/1402-the-walking-dead"
+                "https://www.themoviedb.org/tv/1402-the-walking-dead",
+                "tv_shows",
+                false
             )
         )
 

@@ -1,58 +1,124 @@
 package com.adhitya.katalogfilm.data.source.remote
 
-import com.adhitya.katalogfilm.data.source.remote.response.MoviesDetailsResponse
-import com.adhitya.katalogfilm.data.source.remote.response.MoviesResultsItem
-import com.adhitya.katalogfilm.data.source.remote.response.ResultsItem
-import com.adhitya.katalogfilm.data.source.remote.response.TVShowsDetailsResponse
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.adhitya.katalogfilm.BuildConfig
+import com.adhitya.katalogfilm.R
+import com.adhitya.katalogfilm.data.source.ApiService
+import com.adhitya.katalogfilm.data.source.remote.response.*
+import com.adhitya.katalogfilm.utils.ApiHelper
 import com.adhitya.katalogfilm.utils.EspressoIdlingResource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import retrofit2.await
+import java.io.IOException
+import javax.inject.Inject
 
 
-class RemoteDataSource {
+class RemoteDataSource @Inject constructor(private val filmApiService: ApiService) {
+
     companion object {
 
-        const val API_KEY = "95a852f12ee3b7fced1a6343e4f2c221"
+        const val API_KEY = BuildConfig.API_KEY
 
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance() : RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource().apply { instance = this }
+//        fun getInstance(): RemoteDataSource =
+//            instance ?: synchronized(this) {
+//                instance ?: RemoteDataSource().apply { instance = this }
+//            }
+    }
+
+    fun getMoviesList(): LiveData<ApiResponse<List<MoviesResultsItem>>> {
+        EspressoIdlingResource.increment()
+        val resultMovies = MutableLiveData<ApiResponse<List<MoviesResultsItem>>>()
+        CoroutineScope(IO).launch {
+            try {
+                val response = filmApiService.getListMovies(API_KEY).await()
+                resultMovies.postValue(ApiResponse.success(response.results))
+            } catch (e: IOException) {
+                e.printStackTrace()
+                resultMovies.postValue(
+                    ApiResponse.error(
+                        e.message.toString(),
+                        mutableListOf()
+                    )
+                )
             }
+        }
+        EspressoIdlingResource.decrement()
+        return resultMovies
     }
 
-    suspend fun getMoviesList(callback: LoadMoviesListCallback) {
+    fun getMoviesDetails(movieId: Int): LiveData<ApiResponse<MoviesDetailsResponse>> {
         EspressoIdlingResource.increment()
-        ApiConfig.instance.getListMovies(API_KEY).await().results.let { movieList ->
-            callback.onMoviesListReceived(movieList)
-            EspressoIdlingResource.decrement()
+        val resultDetailsMovie = MutableLiveData<ApiResponse<MoviesDetailsResponse>>()
+        CoroutineScope(IO).launch {
+            try {
+                filmApiService.getDetailsMovies(movieId, API_KEY).await().let { movieDetails ->
+                    resultDetailsMovie.postValue(ApiResponse.success(movieDetails))
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
+        EspressoIdlingResource.decrement()
+        return resultDetailsMovie
     }
 
-    suspend fun getMoviesDetails(movieId: Int, callback: LoadMoviesDetailsCallback){
+    fun getTvShowsList(): LiveData<ApiResponse<List<ResultsItem>>> {
         EspressoIdlingResource.increment()
-        ApiConfig.instance.getDetailsMovies(movieId, API_KEY).await().let { movieDetails ->
-            callback.onMoviesDetailsReceived(movieDetails)
-            EspressoIdlingResource.decrement()
+        val resultTvShowsList = MutableLiveData<ApiResponse<List<ResultsItem>>>()
+        CoroutineScope(IO).launch {
+            try {
+                val response = filmApiService.getListTvShows(API_KEY).await()
+                resultTvShowsList.postValue(ApiResponse.success(response.results))
+            } catch (e: IOException) {
+                e.printStackTrace()
+                resultTvShowsList.postValue(
+                    ApiResponse.error(
+                        e.message.toString(),
+                        mutableListOf()
+                    )
+                )
+            }
         }
+        EspressoIdlingResource.decrement()
+        return resultTvShowsList
     }
 
-    suspend fun getTvShowsList(callback: LoadTvShowsListCallback) {
+    fun getTvShowsDetails(tv_id: Int): LiveData<ApiResponse<TVShowsDetailsResponse>> {
         EspressoIdlingResource.increment()
-        ApiConfig.instance.getListTvShows(API_KEY).await().results.let { tvShowsList ->
-            callback.onTvShowsListReceived(tvShowsList)
-            EspressoIdlingResource.decrement()
+        val resultTvShowsDetails = MutableLiveData<ApiResponse<TVShowsDetailsResponse>>()
+        CoroutineScope(IO).launch {
+            try {
+                val response = filmApiService.getDetailsTvShows(tv_id, API_KEY).await()
+                resultTvShowsDetails.postValue(ApiResponse.success(response))
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
+        EspressoIdlingResource.decrement()
+        return resultTvShowsDetails
     }
 
-    suspend fun getTvShowsDetails(tv_id: Int, callback: LoadTvShowsDetailsCallback) {
-        EspressoIdlingResource.increment()
-        ApiConfig.instance.getDetailsTvShows(tv_id, API_KEY).await().let { tvShowsDetails ->
-            callback.onTvShowsDetailsReceived(tvShowsDetails)
-            EspressoIdlingResource.decrement()
-        }
-    }
+//    fun getMovieList(liveData: MutableLiveData<MutableList<MoviesResultsItem>>) {
+//        apiHelper.getMoviesList(liveData)
+//    }
+//
+//    fun getMovieDetails(movieId: Int, liveData: MutableLiveData<MoviesDetailsResponse>) {
+//        apiHelper.getMoviesDetails(movieId, liveData)
+//    }
+//
+//    fun getTvShowList(liveData: MutableLiveData<MutableList<ResultsItem>>) {
+//        apiHelper.getTvShowsList(liveData)
+//    }
+//
+//    fun getTvShowDetails(tvShowId: Int, liveData: MutableLiveData<TVShowsDetailsResponse>) {
+//        apiHelper.getTvShowsDetails(tvShowId, liveData)
+//    }
 
     interface LoadMoviesListCallback {
         fun onMoviesListReceived(moviesResultsItem: List<MoviesResultsItem>)

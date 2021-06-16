@@ -3,8 +3,9 @@ package com.adhitya.katalogfilm.ui.movies
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.adhitya.katalogfilm.data.FilmEntity
+import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
 import com.adhitya.katalogfilm.data.source.FilmRepository
+import com.adhitya.katalogfilm.ui.main.MainViewModel
 import com.adhitya.katalogfilm.utils.FilmsData
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
@@ -19,7 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class MoviesViewModelTest {
-    private lateinit var viewModel: MoviesViewModel
+    private lateinit var viewModel: MainViewModel
     private val dummyMovies = FilmsData.generateMoviesData()[0]
     private val moviesId = dummyMovies.filmId
 
@@ -38,8 +39,8 @@ class MoviesViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = MoviesViewModel(filmRepository)
-        viewModel.setSelectedMovies(moviesId)
+        viewModel = MainViewModel(filmRepository)
+//        viewModel.setSelectedMovies(moviesId)
     }
 
     @Test

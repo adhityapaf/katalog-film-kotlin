@@ -4,16 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adhitya.katalogfilm.databinding.FragmentMoviesBinding
+import com.adhitya.katalogfilm.ui.main.MainViewModel
 import com.adhitya.katalogfilm.viewmodel.ViewModelFactory
+import com.adhitya.katalogfilm.vo.Status
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class MoviesFragment : Fragment() {
+class MoviesFragment : DaggerFragment() {
 
     private lateinit var fragmentMoviesBinding: FragmentMoviesBinding
 
+    @Inject
+    lateinit var factory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,20 +35,27 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
 
-            val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(
                 this,
                 factory
-            )[MoviesViewModel::class.java]
-            val movies = viewModel.getMovies()
+            )[MainViewModel::class.java]
 
-            fragmentMoviesBinding.progressBar.visibility = View.VISIBLE
             val moviesAdapter = MoviesAdapter()
 
             viewModel.getMovies().observe(viewLifecycleOwner, { movies ->
-                fragmentMoviesBinding.progressBar.visibility = View.GONE
-                moviesAdapter.setFilms(movies)
-                moviesAdapter.notifyDataSetChanged()
+                if (movies != null) {
+                    when (movies.status) {
+                        Status.LOADING -> fragmentMoviesBinding.progressBar.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            fragmentMoviesBinding.progressBar.visibility = View.GONE
+                            moviesAdapter.submitList(movies.data)
+                        }
+                        Status.ERROR -> {
+                            fragmentMoviesBinding.progressBar.visibility = View.GONE
+                            Toast.makeText(context, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             })
 
             with(fragmentMoviesBinding.rvMovies) {

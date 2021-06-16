@@ -2,16 +2,19 @@ package com.adhitya.katalogfilm.ui.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.adhitya.katalogfilm.data.FilmEntity
+import androidx.paging.PagedList
+import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
 import com.adhitya.katalogfilm.data.source.FilmRepository
+import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
+import com.adhitya.katalogfilm.vo.Resource
 
 class MoviesViewModel (private val filmRepository: FilmRepository) : ViewModel() {
-    private lateinit var filmId: String
-    fun getMovies() : LiveData<List<FilmEntity>> = filmRepository.getMovies()
+    private lateinit var movieId: String
+//    fun getMovies() : LiveData<Resource<PagedList<MovieEntity>>> = filmRepository.getMovies()
 
-    fun setSelectedMovies(filmId: String) {
-        this.filmId = filmId
+    fun setSelectedMovies(movieId: String) {
+        this.movieId = movieId
     }
 
-    fun getDetailMovies() : LiveData<FilmEntity> = filmRepository.getDetailsMovies(filmId)
+    fun getDetailMovies() : LiveData<FilmEntity> = filmRepository.getDetailsMovies(movieId)
 }
