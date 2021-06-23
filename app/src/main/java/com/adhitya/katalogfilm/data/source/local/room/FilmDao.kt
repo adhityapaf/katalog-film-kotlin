@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
-import com.adhitya.katalogfilm.data.source.local.entity.TvShowEntity
 
 @Dao
 interface FilmDao {

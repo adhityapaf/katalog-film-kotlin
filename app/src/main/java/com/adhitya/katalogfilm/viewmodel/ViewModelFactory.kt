@@ -1,6 +1,5 @@
 package com.adhitya.katalogfilm.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.adhitya.katalogfilm.data.source.FilmRepository
@@ -13,15 +12,15 @@ class ViewModelFactory @Inject constructor(private val mFilmRepository: FilmRepo
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        when {
+        return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                return MainViewModel(mFilmRepository) as T
+                MainViewModel(mFilmRepository) as T
             }
             modelClass.isAssignableFrom(FavoriteMainViewModel::class.java) -> {
-                return FavoriteMainViewModel(mFilmRepository) as T
+                FavoriteMainViewModel(mFilmRepository) as T
             }
             modelClass.isAssignableFrom(DetailFilmViewModel::class.java) -> {
-                return DetailFilmViewModel(mFilmRepository) as T
+                DetailFilmViewModel(mFilmRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel Class " + modelClass.name)
         }

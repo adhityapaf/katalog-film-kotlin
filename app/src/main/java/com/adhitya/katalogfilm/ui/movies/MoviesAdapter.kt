@@ -7,7 +7,6 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
 import com.adhitya.katalogfilm.databinding.ItemsMoviesBinding
 import com.adhitya.katalogfilm.ui.details.DetailFilmActivity
 import com.bumptech.glide.Glide
@@ -24,14 +23,6 @@ class MoviesAdapter : PagedListAdapter<FilmEntity, MoviesAdapter.FilmViewHolder>
                 return oldItem == newItem
             }
         }
-    }
-
-    private var listMovies = ArrayList<FilmEntity>()
-
-    fun setFilms(movie: List<FilmEntity>?) {
-        if (movie == null) return
-        this.listMovies.clear()
-        this.listMovies.addAll(movie)
     }
 
     override fun onCreateViewHolder(

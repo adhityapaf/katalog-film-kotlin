@@ -1,11 +1,9 @@
 package com.adhitya.katalogfilm.ui.favorited
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import com.adhitya.katalogfilm.R
 import com.adhitya.katalogfilm.databinding.ActivityFavoriteMainBinding
-import com.adhitya.katalogfilm.ui.main.SectionsPagerAdapter
 import dagger.android.support.DaggerAppCompatActivity
 
 class FavoriteMainActivity : DaggerAppCompatActivity() {

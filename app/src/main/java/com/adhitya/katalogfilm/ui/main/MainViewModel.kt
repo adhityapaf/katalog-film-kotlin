@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.adhitya.katalogfilm.data.source.FilmRepository
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
-import com.adhitya.katalogfilm.data.source.local.entity.TvShowEntity
 import com.adhitya.katalogfilm.vo.Resource
 import javax.inject.Inject
 

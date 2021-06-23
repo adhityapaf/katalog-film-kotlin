@@ -5,8 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
-import com.adhitya.katalogfilm.data.source.local.entity.TvShowEntity
 
 @Database(
     entities = [FilmEntity::class],

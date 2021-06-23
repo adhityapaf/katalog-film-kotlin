@@ -1,18 +1,14 @@
 package com.adhitya.katalogfilm.data.source
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.adhitya.katalogfilm.data.NetworkBoundResource
 import com.adhitya.katalogfilm.data.source.local.LocalDataSource
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
-import com.adhitya.katalogfilm.data.source.local.entity.TvShowEntity
 import com.adhitya.katalogfilm.data.source.remote.ApiResponse
 import com.adhitya.katalogfilm.data.source.remote.RemoteDataSource
 import com.adhitya.katalogfilm.data.source.remote.response.*
-import com.adhitya.katalogfilm.utils.AppExecutors
 import com.adhitya.katalogfilm.vo.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -33,15 +29,6 @@ class FilmRepository @Inject constructor(
         @Volatile
         private var instance: FilmRepository? = null
 
-        fun getInstance(
-            remoteDataSource: RemoteDataSource,
-            localDataSource: LocalDataSource
-        ): FilmRepository =
-            instance ?: synchronized(this) {
-                instance ?: FilmRepository(remoteDataSource, localDataSource).apply {
-                    instance = this
-                }
-            }
     }
 
     override fun getMovies(): LiveData<Resource<PagedList<FilmEntity>>> {
@@ -69,7 +56,7 @@ class FilmRepository @Inject constructor(
                         response.id.toString(),
                         response.title,
                         response.overview,
-                        response.releaseDate,
+                        response.releaseDate.take(4),
                         getDetailsMovies(response.id.toString()).value?.genre.toString(),
                         POSTER_PREFIX_URL + response.posterPath,
                         "${getDetailsMovies(response.id.toString()).value?.duration.toString()}m",
@@ -85,45 +72,16 @@ class FilmRepository @Inject constructor(
     }
 
     override fun getFavoritedMovies(): LiveData<PagedList<FilmEntity>> {
-        val config = PagedList.Config.Builder().apply {
-            setEnablePlaceholders(false)
-            setInitialLoadSizeHint(4)
-            setPageSize(4)
-        }
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
             .build()
         return LivePagedListBuilder(localDataSource.getFavoritedMovies(), config).build()
     }
 
-        override fun getDetailsMovies(movieId: String): LiveData<FilmEntity> = localDataSource.getDetailsMovie(movieId)
-
-
-//    override fun getDetailsMovies(movieId: String): LiveData<Resource<FilmEntity>> {
-//        return object : NetworkBoundResource<FilmEntity, MoviesDetailsResponse>() {
-//            override fun loadFromDB(): LiveData<FilmEntity> =
-//                localDataSource.getDetailsMovie(movieId)
-//
-//            override fun shouldFetch(data: FilmEntity?): Boolean =
-//                data?.filmId == null || data.filmId.isEmpty()
-//
-//            override fun createCall(): LiveData<ApiResponse<MoviesDetailsResponse>> =
-//                remoteDataSource.getMoviesDetails(movieId.toInt())
-//
-//            override fun saveCallResult(data: MoviesDetailsResponse) {
-//                FilmEntity(
-//                    data.id.toString(),
-//                    data.title,
-//                    data.overview,
-//                    data.releaseDate.substring(0, 4),
-//                    data.genres.joinToString(),
-//                    POSTER_PREFIX_URL + data.posterPath,
-//                    "${data.runtime} m",
-//                    MOVIE_LINK_PREFIX_URL + data.id,
-//                    "movies",
-//                    false
-//                )
-//            }
-//        }.asLiveData()
-//    }
+    override fun getDetailsMovies(movieId: String): LiveData<FilmEntity> =
+        localDataSource.getDetailsMovie(movieId)
 
     override fun setFavoriteMovie(movie: FilmEntity, state: Boolean) {
         CoroutineScope(IO).launch {
@@ -157,7 +115,7 @@ class FilmRepository @Inject constructor(
                         tvShowResult.id.toString(),
                         tvShowResult.name,
                         tvShowResult.overview,
-                        tvShowResult.firstAirDate,
+                        tvShowResult.firstAirDate.take(4),
                         getDetailsTvShows(tvShowResult.id.toString()).value?.genre.toString(),
                         POSTER_PREFIX_URL + tvShowResult.posterPath,
                         getDetailsTvShows(tvShowResult.id.toString()).value?.duration.toString(),
@@ -173,44 +131,15 @@ class FilmRepository @Inject constructor(
     }
 
     override fun getFavoritedTvShows(): LiveData<PagedList<FilmEntity>> {
-        val config = PagedList.Config.Builder().apply {
-            setEnablePlaceholders(false)
-            setInitialLoadSizeHint(4)
-            setPageSize(4)
-        }
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
             .build()
         return LivePagedListBuilder(localDataSource.getFavoritedTvShows(), config).build()
     }
 
-        override fun getDetailsTvShows(tvShowId: String): LiveData<FilmEntity> = localDataSource.getDetailsTvShow(tvShowId)
-
-
-//    override fun getDetailsTvShows(tvShowId: String): LiveData<Resource<FilmEntity>> {
-//        return object : NetworkBoundResource<FilmEntity, TVShowsDetailsResponse>() {
-//            override fun loadFromDB(): LiveData<FilmEntity> =
-//                localDataSource.getDetailsTvShow(tvShowId)
-//
-//            override fun shouldFetch(data: FilmEntity?): Boolean = data?.filmId == null
-//
-//            override fun createCall(): LiveData<ApiResponse<TVShowsDetailsResponse>> =
-//                remoteDataSource.getTvShowsDetails(tvShowId.toInt())
-//
-//            override fun saveCallResult(data: TVShowsDetailsResponse) {
-//                FilmEntity(
-//                    data.id.toString(),
-//                    data.name,
-//                    data.overview,
-//                    data.firstAirDate.substring(0, 4),
-//                    data.genres.joinToString(),
-//                    POSTER_PREFIX_URL + data.posterPath,
-//                    data.episodeRunTime.joinToString() + "m",
-//                    TV_SHOWS_LINK_PREFIX_URL + data.id,
-//                    "tv_shows",
-//                    false
-//                )
-//            }
-//
-//        }.asLiveData()
+    override fun getDetailsTvShows(tvShowId: String): LiveData<FilmEntity> = localDataSource.getDetailsTvShow(tvShowId)
 
     override fun setFavoriteTvShow(tvShow: FilmEntity, state: Boolean) {
         CoroutineScope(IO).launch {

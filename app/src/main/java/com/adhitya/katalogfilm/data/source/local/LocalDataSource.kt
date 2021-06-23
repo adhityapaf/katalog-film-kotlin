@@ -3,18 +3,10 @@ package com.adhitya.katalogfilm.data.source.local
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
-import com.adhitya.katalogfilm.data.source.local.entity.TvShowEntity
 import com.adhitya.katalogfilm.data.source.local.room.FilmDao
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(private val mFilmDao: FilmDao) {
-    companion object {
-        private var INSTANCE : LocalDataSource? = null
-
-        fun getInstance(filmDao: FilmDao) : LocalDataSource =
-            INSTANCE ?: LocalDataSource(filmDao)
-    }
 
     fun getMovies() : DataSource.Factory<Int, FilmEntity> = mFilmDao.getMovies()
 

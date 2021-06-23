@@ -3,10 +3,11 @@ package com.adhitya.katalogfilm.data.source.remote
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.adhitya.katalogfilm.BuildConfig
-import com.adhitya.katalogfilm.R
 import com.adhitya.katalogfilm.data.source.ApiService
-import com.adhitya.katalogfilm.data.source.remote.response.*
-import com.adhitya.katalogfilm.utils.ApiHelper
+import com.adhitya.katalogfilm.data.source.remote.response.MoviesDetailsResponse
+import com.adhitya.katalogfilm.data.source.remote.response.MoviesResultsItem
+import com.adhitya.katalogfilm.data.source.remote.response.ResultsItem
+import com.adhitya.katalogfilm.data.source.remote.response.TVShowsDetailsResponse
 import com.adhitya.katalogfilm.utils.EspressoIdlingResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -19,16 +20,7 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(private val filmApiService: ApiService) {
 
     companion object {
-
         const val API_KEY = BuildConfig.API_KEY
-
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-//        fun getInstance(): RemoteDataSource =
-//            instance ?: synchronized(this) {
-//                instance ?: RemoteDataSource().apply { instance = this }
-//            }
     }
 
     fun getMoviesList(): LiveData<ApiResponse<List<MoviesResultsItem>>> {
@@ -102,37 +94,5 @@ class RemoteDataSource @Inject constructor(private val filmApiService: ApiServic
         }
         EspressoIdlingResource.decrement()
         return resultTvShowsDetails
-    }
-
-//    fun getMovieList(liveData: MutableLiveData<MutableList<MoviesResultsItem>>) {
-//        apiHelper.getMoviesList(liveData)
-//    }
-//
-//    fun getMovieDetails(movieId: Int, liveData: MutableLiveData<MoviesDetailsResponse>) {
-//        apiHelper.getMoviesDetails(movieId, liveData)
-//    }
-//
-//    fun getTvShowList(liveData: MutableLiveData<MutableList<ResultsItem>>) {
-//        apiHelper.getTvShowsList(liveData)
-//    }
-//
-//    fun getTvShowDetails(tvShowId: Int, liveData: MutableLiveData<TVShowsDetailsResponse>) {
-//        apiHelper.getTvShowsDetails(tvShowId, liveData)
-//    }
-
-    interface LoadMoviesListCallback {
-        fun onMoviesListReceived(moviesResultsItem: List<MoviesResultsItem>)
-    }
-
-    interface LoadMoviesDetailsCallback {
-        fun onMoviesDetailsReceived(moviesDetailsResponse: MoviesDetailsResponse)
-    }
-
-    interface LoadTvShowsListCallback {
-        fun onTvShowsListReceived(tvShowsResponse: List<ResultsItem>)
-    }
-
-    interface LoadTvShowsDetailsCallback {
-        fun onTvShowsDetailsReceived(tvShowsDetailsResponse: TVShowsDetailsResponse)
     }
 }

@@ -1,7 +1,6 @@
 package com.adhitya.katalogfilm.ui.tv_shows
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class TVShowsFragment : DaggerFragment() {
-    lateinit var fragmentTVShowsBinding: FragmentTVShowsBinding
+    private lateinit var fragmentTVShowsBinding: FragmentTVShowsBinding
 
     @Inject
     lateinit var factory: ViewModelFactory

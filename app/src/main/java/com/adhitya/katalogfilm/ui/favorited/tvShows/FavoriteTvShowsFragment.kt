@@ -1,15 +1,12 @@
 package com.adhitya.katalogfilm.ui.favorited.tvShows
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.adhitya.katalogfilm.R
 import com.adhitya.katalogfilm.databinding.FavoriteTvShowsFragmentBinding
-import com.adhitya.katalogfilm.databinding.ItemsFavoriteTvShowsBinding
 import com.adhitya.katalogfilm.ui.favorited.FavoriteMainViewModel
 import com.adhitya.katalogfilm.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -27,7 +24,7 @@ class FavoriteTvShowsFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentFavoriteTvShowsBinding = FavoriteTvShowsFragmentBinding.inflate(layoutInflater, container, false)
         return fragmentFavoriteTvShowsBinding.root
     }

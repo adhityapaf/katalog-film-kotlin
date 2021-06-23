@@ -3,12 +3,10 @@ package com.adhitya.katalogfilm.ui.tv_shows
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.TvShowEntity
 import com.adhitya.katalogfilm.databinding.ItemsTvShowsBinding
 import com.adhitya.katalogfilm.ui.details.DetailFilmActivity
 import com.bumptech.glide.Glide
@@ -25,14 +23,6 @@ class TVShowsAdapter : PagedListAdapter<FilmEntity, TVShowsAdapter.TVShowsViewHo
                 return oldItem == newItem
             }
         }
-    }
-
-    private var listTVShows = ArrayList<FilmEntity>()
-
-    fun setTvShows(tv_shows: List<FilmEntity>) {
-        if (tv_shows == null) return
-        this.listTVShows.clear()
-        this.listTVShows.addAll(tv_shows)
     }
 
     override fun onCreateViewHolder(

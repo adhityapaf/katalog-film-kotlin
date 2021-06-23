@@ -1,11 +1,8 @@
 package com.adhitya.katalogfilm.data.source
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.adhitya.katalogfilm.data.source.local.entity.FilmEntity
-import com.adhitya.katalogfilm.data.source.local.entity.MovieEntity
-import com.adhitya.katalogfilm.data.source.local.entity.TvShowEntity
 import com.adhitya.katalogfilm.vo.Resource
 
 interface FilmDataSource {
